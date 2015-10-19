@@ -1,5 +1,5 @@
 {
-    "name": "graham-campbell/credentials",
+    "name": "zgs225/credentials",
     "description": "Credentials Is A Cool Way To Authenticate In Laravel 5",
     "keywords": ["laravel", "framework", "credentials", "login", "users", "permissions", "sentry", "Credentials", "Laravel Credentials", "Laravel-Credentials", "Graham Campbell", "GrahamCampbell"],
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Graham Campbell",
             "email": "graham@alt-three.com"
+        },
+        {
+            "name": "Yuez",
+            "email": "i@yuez.me"
         }
     ],
     "repositories": [
