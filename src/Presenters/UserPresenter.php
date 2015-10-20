@@ -50,7 +50,7 @@ class UserPresenter extends BasePresenter
      */
     public function name()
     {
-        return $this->wrappedObject->first_name.' '.$this->wrappedObject->last_name;
+        return $this->wrappedObject->last_name.$this->wrappedObject->first_name;
     }
 
     /**

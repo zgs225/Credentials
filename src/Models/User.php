@@ -56,14 +56,14 @@ class User extends SentryUser implements HasPresenter
      *
      * @var array
      */
-    protected $keepRevisionOf = ['email', 'password', 'activated', 'last_login', 'first_name', 'last_name'];
+    protected $keepRevisionOf = ['email', 'password', 'activated', 'last_login', 'first_name', 'last_name', 'phone'];
 
     /**
      * The columns to select when displaying an index.
      *
      * @var array
      */
-    public static $index = ['id', 'email', 'first_name', 'last_name'];
+    public static $index = ['id', 'email', 'first_name', 'last_name', 'phone'];
 
     /**
      * The max users per page when displaying a paginated index.
@@ -95,6 +95,7 @@ class User extends SentryUser implements HasPresenter
         'first_name'            => 'required|min:2|max:32',
         'last_name'             => 'required|min:2|max:32',
         'email'                 => 'required|min:4|max:32|email',
+        'phone'                 => 'required',
         'password'              => 'required|min:6|confirmed',
         'password_confirmation' => 'required',
         'activated'             => 'required',
