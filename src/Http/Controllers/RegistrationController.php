@@ -101,8 +101,11 @@ class RegistrationController extends AbstractController
                 $user->attemptActivation($user->getActivationCode());
                 $user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
 
+                // 注册后登录
+                Credentials::login($user);
+
                 return Redirect::to(Config::get('credentials.home', '/'))
-                    ->with('success', 'Your account has been created successfully. You may now login.');
+                    ->with('success', '恭喜！您已经报名成功。');
             }
 
             $code = $user->getActivationCode();
@@ -111,7 +114,7 @@ class RegistrationController extends AbstractController
                 'url'     => URL::to(Config::get('credentials.home', '/')),
                 'link'    => URL::route('account.activate', ['id' => $user->id, 'code' => $code]),
                 'email'   => $user->getLogin(),
-                'subject' => Config::get('app.name').' - Welcome',
+                'subject' => Config::get('app.name').' - 欢迎参加',
             ];
 
             Mail::queue('credentials::emails.welcome', $mail, function ($message) use ($mail) {

@@ -98,14 +98,14 @@ class LoginController extends AbstractController
             Credentials::authenticate($input, $remember);
         } catch (WrongPasswordException $e) {
             return Redirect::route('account.login')->withInput()->withErrors($val->errors())
-                ->with('error', 'Your password was incorrect.');
+                ->with('error', '输入的密码不正确。');
         } catch (UserNotFoundException $e) {
             return Redirect::route('account.login')->withInput()->withErrors($val->errors())
-                ->with('error', 'That user does not exist.');
+                ->with('error', '该账户不存在。');
         } catch (UserNotActivatedException $e) {
             if (Config::get('credentials::activation')) {
                 return Redirect::route('account.login')->withInput()->withErrors($val->errors())
-                ->with('error', 'You have not yet activated this account.');
+                ->with('error', '该账户尚未激活。');
             } else {
                 $throttle->user->attemptActivation($throttle->user->getActivationCode());
                 $throttle->user->addGroup(Credentials::getGroupProvider()->findByName('Users'));
@@ -116,10 +116,10 @@ class LoginController extends AbstractController
             $time = $throttle->getSuspensionTime();
 
             return Redirect::route('account.login')->withInput()->withErrors($val->errors())
-                ->with('error', "Your account has been suspended for $time minutes.");
+                ->with('error', "登录异常，该账户将在$time分钟内无法登录。");
         } catch (UserBannedException $e) {
             return Redirect::route('account.login')->withInput()->withErrors($val->errors())
-                ->with('error', 'You have been banned. Please contact support.');
+                ->with('error', '该账户已经被冻结，请联系管理员解决。');
         }
 
         return Redirect::intended(Config::get('credentials.home', '/'));
