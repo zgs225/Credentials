@@ -92,9 +92,9 @@ class User extends SentryUser implements HasPresenter
      * @var array
      */
     public static $rules = [
-        'first_name'            => 'required|min:2|max:32',
-        'last_name'             => 'required|min:2|max:32',
-        'email'                 => 'required|min:4|max:32|email',
+        'first_name'            => 'required|max:32',
+        'last_name'             => 'required|max:32',
+        'email'                 => 'required|min:4|max:60|email',
         'phone'                 => 'required',
         'password'              => 'required|min:6|confirmed',
         'password_confirmation' => 'required',
