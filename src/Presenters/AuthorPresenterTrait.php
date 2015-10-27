@@ -18,17 +18,17 @@ namespace GrahamCampbell\Credentials\Presenters;
  */
 trait AuthorPresenterTrait
 {
-    /**
-     * Get the author's name.
-     *
-     * @return string
-     */
-    public function author()
-    {
-        $user = $this->getWrappedObject()->user()->withTrashed()->first(['first_name', 'last_name']);
+  /**
+   * Get the author's name.
+   *
+   * @return string
+   */
+  public function author()
+  {
+    $user = $this->getWrappedObject()->user()->withTrashed()->first(['first_name', 'last_name']);
 
-        if ($user) {
-            return $user->first_name.' '.$user->last_name;
-        }
+    if ($user) {
+      return $user->last_name.$user->first_name;
     }
+  }
 }
