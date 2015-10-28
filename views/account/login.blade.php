@@ -1,57 +1,63 @@
 @extends(Config::get('credentials.layout'))
 
 @section('title')
-Login
-@stop
-
-@section('top')
-<div class="page-header">
-<h1>Login</h1>
-</div>
+登录
 @stop
 
 @section('content')
-<p class="lead">Please enter your details:</p>
-<div class="well">
-    <form class="form-horizontal" action="{{ URL::route('account.login.post') }}" method="POST">
+<section class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="/"><b>{{ Config::get('app.name') }}</b></a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
 
+
+      <p class="login-box-msg">请输入您的邮箱和密码：</p>
+
+      <form action="{{ URL::route('account.login.post') }}" method="POST" role="form" class="agency-form">
         {{ csrf_field() }}
 
-        <div class="form-group{!! ($errors->has('email')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="email">Email</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="email" id="email" value="{!! Request::old('email') !!}" type="text" class="form-control" placeholder="Email">
-                {!! ($errors->has('email') ? $errors->first('email') : '') !!}
-            </div>
+        <div class="form-group has-feedback">
+          <input type="email" class="form-control without-radius" placeholder="邮箱" name="email" value="{!! Request::old('email') !!}">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
-
-       <div class="form-group{!! ($errors->has('password')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="password">Password</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="password" id="password" value="" type="password" class="form-control" placeholder="Password">
-                {!! ($errors->has('password') ? $errors->first('password') : '') !!}
-            </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control without-radius" placeholder="密码" name="password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
-                <div class="checkbox">
-                    <label><input type="checkbox" name="rememberMe" value="1"> Remember Me</label>
-                </div>
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="checkbox icheck">
+              <input type="checkbox" name="rememberMe" value="1"> 记住我
             </div>
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+          </div>
         </div>
+      </form>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Log In</button>
-                @if (Config::get('credentials.activation'))
-                    <label><a href="{!! URL::route('account.reset') !!}" class="btn btn-link">Forgot Password?</a>/<a href="{!! URL::route('account.resend') !!}" class="btn btn-link">Not Activated?</a></label>
-                @else
-                    <label><a href="{!! URL::route('account.reset') !!}" class="btn btn-link">Forgot Password?</a>
-                @endif
-            </div>
-        </div>
+      <a href="{!! URL::route('account.reset') !!}" class="text-muted">忘记密码?</a>
 
-  </form>
-</div>
+    </div><!-- /.login-box-body -->
+  </div>
+</section>
+@stop
+
+@section ('js')
+<script src="/assets/scripts/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+@stop
+
+@section ('css')
+<link rel="stylesheet" href="/assets/styles/icheck-square.css">
 @stop
