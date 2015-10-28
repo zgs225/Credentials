@@ -1,69 +1,106 @@
 @extends(Config::get('credentials.layout'))
 
 @section('title')
-Register
-@stop
-
-@section('top')
-<div class="page-header">
-<h1>Register</h1>
-</div>
+报名
 @stop
 
 @section('content')
-<p class="lead">Please enter your details:</p>
-<div class="well">
-    <form class="form-horizontal" action="{{ URL::route('account.register.post') }}" method="POST">
+<section class="register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="/"><b>{{ Config::get('app.name') }}</b></a>
+    </div><!-- /.register-logo -->
+    <div class="register-box-body">
 
+
+      <p class="register-box-msg">请填写真实资料报名</p>
+
+      <form action="{{ URL::route('account.register.post') }}" method="POST" role="form" class="agency-form" novalidate>
         {{ csrf_field() }}
 
-        <div class="form-group{!! ($errors->has('first_name')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="first_name">First Name</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="first_name" id="first_name" value="{!! Request::old('first_name') !!}" type="text" class="form-control" placeholder="First Name">
-                {!! ($errors->has('first_name') ? $errors->first('first_name') : '') !!}
-            </div>
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="text"
+                   class="form-control without-radius"
+                   placeholder="姓"
+                   required
+                   data-validation-required-message="请填写你的姓氏"
+                   name="last_name"
+                   value="{!! Request::old('last_name') !!}">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
         </div>
-
-        <div class="form-group{!! ($errors->has('last_name')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="last_name">Last Name</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="last_name" id="last_name" value="{!! Request::old('last_name') !!}" type="text" class="form-control" placeholder="Last Name">
-                {!! ($errors->has('last_name') ? $errors->first('last_name') : '') !!}
-            </div>
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="text"
+                   class="form-control without-radius"
+                   placeholder="名"
+                   name="first_name"
+                   required
+                   data-validation-required-message="请填写你的名字">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
         </div>
-
-        <div class="form-group{!! ($errors->has('email')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="email">Email</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="email" id="email" value="{!! Request::old('email') !!}" type="text" class="form-control" placeholder="Email">
-                {!! ($errors->has('email') ? $errors->first('email') : '') !!}
-            </div>
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="email"
+                   class="form-control without-radius"
+                   placeholder="邮箱"
+                   name="email"
+                   required
+                   data-validation-email-message="邮箱格式不正确"
+                   data-validation-required-message="请填写你的邮箱">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
         </div>
-
-        <div class="form-group{!! $errors->has('password') ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="password">Password</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="password" id="password" value="" type="password" class="form-control" placeholder="Password">
-                {!! ($errors->has('password') ?  $errors->first('password') : '') !!}
-            </div>
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="text"
+                   class="form-control without-radius"
+                   placeholder="手机号码"
+                   name="phone"
+                   data-validation-regex-regex="\d{11}"
+                   data-validation-regex-message="请输入正确的手机号，目前只支持中国地区"
+                   required
+                   data-validation-required-message="请填写你的手机号码">
+            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
         </div>
-
-        <div class="form-group{!! $errors->has('password_confirmation') ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="password_confirmation">Confirm Password</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="password_confirmation" id="password_confirmation" value="" type="password" class="form-control" placeholder="Confirm Password">
-                {!! ($errors->has('password_confirmation') ? $errors->first('password_confirmation') : '') !!}
-            </div>
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="password"
+                   class="form-control without-radius"
+                   placeholder="密码"
+                   name="password"
+                   minlength="6"
+                   data-validation-minlength-message="密码最短为6位"
+                   required
+                   data-validation-required-message="请填写密码">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
         </div>
-
+        <div class="form-group has-feedback control-group">
+          <div class="controls">
+            <input type="password"
+                   class="form-control without-radius"
+                   placeholder="确认密码"
+                   name="password_confirmation"
+                   data-validation-match-match="password"
+                   data-validation-match-message="您两次输入的密码不一致">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Register</button>
-                <button class="btn btn-default" type="reset">Reset</button>
-            </div>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">报名</button>
         </div>
-
-    </form>
-</div>
+      </form>
+    </div><!-- /.register-box-body -->
+  </div>
+</section>
 @stop
