@@ -75,7 +75,7 @@ abstract class AbstractAuth
             }
 
             return Redirect::guest(URL::route('account.login'))
-                ->with('error', 'You must be logged in to perform that action.');
+                ->with('error', '您必须登录后再进行操作。');
         }
 
         if (!$this->credentials->hasAccess($level = $this->level())) {

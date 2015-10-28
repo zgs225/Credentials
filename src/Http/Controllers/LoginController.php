@@ -122,6 +122,10 @@ class LoginController extends AbstractController
                 ->with('error', '该账户已经被冻结，请联系管理员解决。');
         }
 
+        if (Credentials::getUser()->hasAccess('admin')) {
+          return Redirect::intended('account/profile');
+        }
+
         return Redirect::intended(Config::get('credentials.home', '/'));
     }
 
@@ -134,6 +138,6 @@ class LoginController extends AbstractController
     {
         Credentials::logout();
 
-        return Redirect::to(Config::get('credentials.home', '/'));
+        return Redirect::to('/');
     }
 }
