@@ -1,7 +1,7 @@
 @extends(Config::get('credentials.email'))
 
 @section('content')
-<p>Here is your temporary password:</p>
+<p>您的临时密码是：</p>
 <blockquote>{!! $password !!}</blockquote>
-<p>You should change it to something more memorable on the account page after you login.</p>
+<p>请在登录后前往个人中心修改您的临时密码。</p>
 @stop

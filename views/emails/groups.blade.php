@@ -1,6 +1,6 @@
 @extends(Config::get('credentials.email'))
 
 @section('content')
-<p>An admin from <a href="{!! $url !!}">{!! Config::get('app.name') !!}</a> has changed your group memberships.</p>
-<p>Login to see your updated permissions.</p>
+<p><a href="{!! $url !!}">{!! Config::get('app.name') !!}</a>一名管理员修改了您的账户权限。</p>
+<p>请登录后查看您的权限。</p>
 @stop

@@ -1,6 +1,6 @@
 @extends(Config::get('credentials.email'))
 
 @section('content')
-<p>You have deleted your account, and all your content, on <a href="{!! $url !!}">{!! Config::get('app.name') !!}</a>.</p>
-<p>If this was not you, please contact us immediately.</p>
+<p>您在<a href="{!! $url !!}">{!! Config::get('app.name') !!}</a>上的账户已经被删除，参赛资料也全部删除。</p>
+<p>如果这不是您操作的，请立刻联系我们。</p>
 @stop
