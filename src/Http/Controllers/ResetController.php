@@ -126,13 +126,13 @@ class ResetController extends AbstractController
 
             if (!$user->attemptResetPassword($code, $password)) {
                 return Redirect::to(Config::get('credentials.home', '/'))
-                    ->with('error', 'There was a problem resetting your password. Please contact support.');
+                    ->with('error', '重置密码时发生了一个问题。 请联系我们以获取支持。');
             }
 
             $mail = [
                 'password' => $password,
                 'email'    => $user->getLogin(),
-                'subject'  => Config::get('app.name').' - New Password Information',
+                'subject'  => Config::get('app.name').' - 临时密码',
             ];
 
             Mail::queue('credentials::emails.password', $mail, function ($message) use ($mail) {
@@ -140,10 +140,10 @@ class ResetController extends AbstractController
             });
 
             return Redirect::to(Config::get('credentials.home', '/'))
-                ->with('success', 'Your password has been changed. Check your email for the new password.');
+                ->with('success', '您的密码已经修改。请前往邮箱查收您的新密码。');
         } catch (UserNotFoundException $e) {
             return Redirect::to(Config::get('credentials.home', '/'))
-                ->with('error', 'There was a problem resetting your password. Please contact support.');
+                ->with('error', '重置密码时发生了一个问题。 请联系我们以获取支持。');
         }
     }
 }
