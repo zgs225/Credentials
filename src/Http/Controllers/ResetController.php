@@ -88,7 +88,7 @@ class ResetController extends AbstractController
             $mail = [
                 'link'    => URL::route('account.password', ['id'    => $user->id, 'code'    => $code]),
                 'email'   => $user->getLogin(),
-                'subject' => Config::get('app.name').' - Password Reset Confirmation',
+                'subject' => Config::get('app.name').' - 重置您的密码',
             ];
 
             Mail::queue('credentials::emails.reset', $mail, function ($message) use ($mail) {
@@ -96,10 +96,10 @@ class ResetController extends AbstractController
             });
 
             return Redirect::route('account.reset')
-                ->with('success', 'Check your email for password reset information.');
+                ->with('success', '已发送重置邮件到您的邮箱中，请注意查收。');
         } catch (UserNotFoundException $e) {
             return Redirect::route('account.reset')
-                ->with('error', 'That user does not exist.');
+                ->with('error', '这个用户不存在。');
         }
     }
 

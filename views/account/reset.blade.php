@@ -1,36 +1,32 @@
 @extends(Config::get('credentials.layout'))
 
 @section('title')
-Reset Password
-@stop
-
-@section('top')
-<div class="page-header">
-<h1>Reset Password</h1>
-</div>
+重置密码
 @stop
 
 @section('content')
-<p class="lead">Please enter your details:</p>
-<div class="well">
-    <form class="form-horizontal" action="{{ URL::route('account.reset.post') }}" method="POST">
+<section class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="/"><b>{{ Config::get('app.name') }}</b></a>
+    </div>
+    <div class="login-box-body">
 
+
+      <p class="login-box-msg">找回您的密码</p>
+
+      <form action="{{ URL::route('account.reset.post') }}" method="POST" role="form" class="agency-form">
         {{ csrf_field() }}
 
-        <div class="form-group{!! ($errors->has('email')) ? ' has-error' : '' !!}">
-            <label class="col-md-2 col-sm-3 col-xs-10 control-label" for="email">Email Address</label>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10">
-                <input name="email" id="email" value="{!! Request::old('email') !!}" type="text" class="form-control" placeholder="Email Address">
-                {!! ($errors->has('email') ? $errors->first('email') : '') !!}
-            </div>
+        <div class="form-group has-feedback">
+          <input type="email" class="form-control without-radius" placeholder="邮箱" name="email" value="{!! Request::old('email') !!}">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-sm-offset-3 col-sm-10 col-xs-12">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-rocket"></i> Reset Password</button>
-            </div>
+          <button type="submit" class="btn btn-block btn-primary btn-flat"> 找回密码 </button>
         </div>
-
-    </form>
-</div>
+      </form>
+    </div>
+  </div>
+</section>
 @stop

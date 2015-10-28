@@ -13,7 +13,7 @@
     <div class="login-box-body">
 
 
-      <p class="login-box-msg">请输入您的邮箱和密码：</p>
+      <p class="login-box-msg">请输入您的邮箱和密码</p>
 
       <form action="{{ URL::route('account.login.post') }}" method="POST" role="form" class="agency-form">
         {{ csrf_field() }}
