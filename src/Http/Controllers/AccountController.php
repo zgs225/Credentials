@@ -84,13 +84,13 @@ class AccountController extends AbstractController
             $user->delete();
         } catch (\Exception $e) {
             return Redirect::to(Config::get('credentials.home', '/'))
-                ->with('error', 'There was a problem deleting your account.');
+                ->with('error', '删除账户的时候发生了一个问题。');
         }
 
         $mail = [
             'url'     => URL::to(Config::get('credentials.home', '/')),
             'email'   => $email,
-            'subject' => Config::get('app.name').' - Account Deleted Notification',
+            'subject' => Config::get('app.name').' - 账户删除通知',
         ];
 
         Mail::queue('credentials::emails.userdeleted', $mail, function ($message) use ($mail) {
@@ -98,7 +98,7 @@ class AccountController extends AbstractController
         });
 
         return Redirect::to(Config::get('credentials.home', '/'))
-            ->with('success', 'Your account has been deleted successfully.');
+            ->with('success', '您的账户已经被成功删除。');
     }
 
     /**
@@ -127,7 +127,7 @@ class AccountController extends AbstractController
                 'old'     => $email,
                 'new'     => $input['email'],
                 'url'     => URL::to(Config::get('credentials.home', '/')),
-                'subject' => Config::get('app.name').' - New Email Information',
+                'subject' => Config::get('app.name').' - 账户更换邮箱通知',
             ];
 
             Mail::queue('credentials::emails.newemail', $mail, function ($message) use ($mail) {
@@ -140,7 +140,7 @@ class AccountController extends AbstractController
         }
 
         return Redirect::route('account.profile')
-            ->with('success', 'Your details have been updated successfully.');
+            ->with('success', '您的账户资料已经更新。');
     }
 
     /**
@@ -165,7 +165,7 @@ class AccountController extends AbstractController
         $mail = [
             'url'     => URL::to(Config::get('credentials.home', '/')),
             'email'   => $user->getLogin(),
-            'subject' => Config::get('app.name').' - New Password Notification',
+            'subject' => Config::get('app.name').' - 修改密码通知',
         ];
 
         Mail::queue('credentials::emails.newpass', $mail, function ($message) use ($mail) {
@@ -175,7 +175,7 @@ class AccountController extends AbstractController
         $user->update($input);
 
         return Redirect::route('account.profile')
-            ->with('success', 'Your password has been updated successfully.');
+            ->with('success', '您的账户密码修改成功。');
     }
 
     /**
